@@ -1,0 +1,11 @@
+services:
+  botnet-detector:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: iot-dns-anomaly-detector:latest
+    container_name: iot-dns-anomaly-detector
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./results:/app/results
