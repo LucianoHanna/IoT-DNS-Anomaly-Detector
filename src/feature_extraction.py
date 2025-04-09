@@ -55,7 +55,21 @@ class DomainFeatureExtractor:
         if FEATURE_CONFIG['alphanumeric_ratio']:
             alphanumeric_chars = sum(c.isalnum() for c in domain)
             features['alphanumeric_ratio'] = alphanumeric_chars / len(domain) if len(domain) > 0 else 0
+
+        if FEATURE_CONFIG['vowel_ratio']:
+            vowels = sum(c.lower() in 'aeiou' for c in domain)
+            features['vowel_ratio'] = vowels / len(domain) if len(domain) > 0 else 0
         
+        if FEATURE_CONFIG['digit_ratio']:
+            digits = sum(c.isdigit() for c in domain)
+            features['digit_ratio'] = digits / len(domain) if len(domain) > 0 else 0
+            features['has_digits'] = digits > 0
+
+        if FEATURE_CONFIG['subdomain_count']:
+            parts = domain.split('.')
+            features['subdomain_count'] = len(parts)
+
+
         # Entropy of domain name - measures randomness of characters
         # Higher entropy often indicates algorithmically generated domains
         if FEATURE_CONFIG['entropy']:

@@ -13,10 +13,13 @@ NGRAM_TOP_K = 75        # Number of most common n-grams to consider as "normal"
 # Feature extraction parameters
 # You can enable/disable specific features or add weights if needed
 FEATURE_CONFIG = {
-    'length': True,             # Use domain length as a feature
-    'alphanumeric_ratio': True, # Use proportion of alphanumeric characters
-    'entropy': True,            # Use character entropy
-    'ngram_features': True,     # Use n-gram based features
+    'length': True,                 # Use domain length as a feature
+    'alphanumeric_ratio': True,     # Use proportion of alphanumeric characters
+    'entropy': True,                # Use character entropy
+    'ngram_features': True,         # Use n-gram based features
+    'vowel_ratio': True,           # Ratio of vowels in the domain
+    'digit_ratio': True,           # Ratio of digits in the domain
+    'subdomain_count': True,        # Subdomain count
 }
 
 # One-class SVM model parameters
