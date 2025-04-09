@@ -1,0 +1,34 @@
+Experiment ID: exp_2
+
+Accuracy: 0.9629013396
+Precision: 0.9999569227
+Recall (Detection Rate): 0.9629125926
+F1 Score: 0.9810851974
+False Positive Rate: 0.0509090909
+
+Detection Rate by DGA Family:
+corebot: 1.0000000000
+emotet: 1.0000000000
+murofet: 1.0000000000
+qadars: 1.0000000000
+ramdo: 1.0000000000
+ranbyus: 1.0000000000
+rovnix: 1.0000000000
+gozi: 0.9993333333
+fobber: 0.9988888889
+padcrypt: 0.9987407407
+dircrypt: 0.9984444444
+ramnit: 0.9980000000
+matsnu: 0.9962222222
+necurs: 0.9957777778
+tinba: 0.9954074074
+pykspa: 0.9920740741
+cryptolocker: 0.9806666667
+kraken: 0.9742222222
+simda: 0.9651851852
+pushdo: 0.9622222222
+nymaim: 0.9448888889
+suppobox: 0.9412592593
+vawtrak: 0.9271111111
+conficker: 0.8632592593
+symmi: 0.5411111111
