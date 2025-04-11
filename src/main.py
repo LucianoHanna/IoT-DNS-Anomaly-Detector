@@ -5,7 +5,7 @@ import os
 import shutil
 import glob
 from feature_extraction import DNSLogParser
-from botnet_detector import BotnetDetector, plot_results, plot_dga_family_results
+from botnet_detector import BotnetDetector
 
 from config import TRAIN_TEST_SPLIT
 
@@ -20,6 +20,123 @@ def get_last_exp_num(model_dir):
             max = cur_exp_number
 
     return max
+
+def feature_importance_per_family(family_results, feature_importance_by_family):
+    """
+    Analyze feature importance for each DGA family and format as a well-aligned table
+    
+    Parameters:
+    family_results (dict): Results by family
+    feature_importance_by_family (dict): Feature values by family
+    
+    Returns:
+    str: Formatted table of feature importance by family
+    """
+    # Get all features across all families
+    all_features = set()
+    for family, feature_dict in feature_importance_by_family.items():
+        all_features.update(feature_dict.keys())
+    
+    # Sort features for consistent output
+    all_features = sorted(list(all_features))
+    
+    # Determine column widths
+    family_width = max(max(len(family) for family in family_results.keys()), len("family"))
+    detection_width = max(len("detection_rate"), 12)  # Minimum width for detection_rate
+    feature_widths = {}
+    for feature in all_features:
+        # Get max width needed for this feature (header or values)
+        values_width = max(
+            len(f"{feature_importance_by_family[family].get(feature, 0):.4f}")
+            for family in family_results.keys()
+        )
+        feature_widths[feature] = max(len(feature), values_width)
+    
+    # Create header
+    header = f"{'family'.ljust(family_width)} | {'detection_rate'.ljust(detection_width)}"
+    for feature in all_features:
+        header += f" | {feature.ljust(feature_widths[feature])}"
+    
+    # Create separator line
+    separator = "-" * len(header)
+    
+    # Create rows
+    rows = []
+    for family, metrics in sorted(family_results.items(), key=lambda x: x[1]['detection_rate'], reverse=True):
+        detection_rate = metrics['detection_rate']
+        row = f"{family.ljust(family_width)} | {f'{detection_rate:.4f}'.ljust(detection_width)}"
+        
+        for feature in all_features:
+            value = feature_importance_by_family[family].get(feature, 0)
+            # Format the value to 4 decimal places and align
+            row += f" | {f'{value:.4f}'.ljust(feature_widths[feature])}"
+        
+        rows.append(row)
+    
+    # Combine everything
+    table = header + "\n" + separator + "\n" + "\n".join(rows)
+    return table
+
+def format_confusion_matrix(confusion_matrix):
+    """
+    Format confusion matrix as text
+    
+    Parameters:
+    confusion_matrix (numpy.ndarray): Confusion matrix
+    
+    Returns:
+    str: Formatted confusion matrix
+    """
+    tn, fp, fn, tp = confusion_matrix.ravel()
+    
+    matrix_text = (
+        "Confusion Matrix:\n"
+        f"              | Predicted Negative | Predicted Positive\n"
+        f"True Negative | {tn:18d} | {fp:18d}\n"
+        f"True Positive | {fn:18d} | {tp:18d}\n"
+    )
+    
+    return matrix_text
+
+def save_text_results(results, family_results, feature_importance_by_family, output_dir, exp_id):
+    """
+    Save all results as text in the results_summary file
+    
+    Parameters:
+    results (dict): Main evaluation results
+    family_results (dict): Results by DGA family
+    feature_importance_by_family (dict): Feature values by family
+    output_dir (str): Directory to save results
+    exp_id (str): Experiment ID
+    """
+    filepath = os.path.join(output_dir, f'results_summary_{exp_id}.txt')
+    with open(filepath, 'w') as f:
+        # General metrics
+        f.write(f"Experiment ID: {exp_id}\n\n")
+        f.write(f"Accuracy: {results['accuracy']:.10f}\n")
+        f.write(f"Precision: {results['precision']:.10f}\n")
+        f.write(f"Recall (Detection Rate): {results['recall']:.10f}\n")
+        f.write(f"F1 Score: {results['f1_score']:.10f}\n")
+        f.write(f"False Positive Rate: {results['false_positive_rate']:.10f}\n\n")
+        
+        # Add confusion matrix
+        if 'confusion_matrix' in results:
+            f.write(format_confusion_matrix(results['confusion_matrix']))
+            f.write("\n\n")
+        
+        # Add family results (detection rate)
+        f.write("Detection Rate by DGA Family:\n")
+        for family, metrics in sorted(family_results.items(), key=lambda x: x[1]['detection_rate'], reverse=True):
+            f.write(f"{family}: {metrics['detection_rate']:.10f}\n")
+        
+        # Add feature importance per family table
+        if feature_importance_by_family:
+            f.write("\n\nFeature Importance by DGA Family:\n")
+            feature_table = feature_importance_per_family(family_results, feature_importance_by_family)
+            f.write(feature_table)
+            f.write("\n")
+
+    print(f"\n\nResults saved to {filepath}\n\n")
     
 
 def main():
@@ -154,16 +271,8 @@ def main():
             dga_families[family] = domains
         
         # Evaluate per family
-        family_results, feature_importance = detector.evaluate_dga_families(dga_families)
-        
-        # Print family results
-        print("\nDetection Rate by DGA Family:")
-        for family, metrics in sorted(family_results.items(), key=lambda x: x[1]['detection_rate'], reverse=True):
-            print(f"{family}: {metrics['detection_rate']:.4f}")
-        
-        # Plot family results
-        plot_dga_family_results(family_results, output_dir)
-        
+        family_results, feature_importance_by_family = detector.evaluate_dga_families(dga_families)
+                
         # Evaluate overall performance
         malicious_domains = malicious_data['domain'].tolist()
         results = detector.evaluate(test_benign_domains, malicious_domains)
@@ -176,32 +285,8 @@ def main():
         with open(os.path.join(output_dir, f'timing_info_{exp_id}.txt'), 'a') as f:
             f.write(f"Evaluation time: {eval_time:.2f} seconds for {len(test_benign_domains) + len(malicious_domains)} domains\n")
             f.write(f"Average evaluation time per domain: {eval_time/(len(test_benign_domains) + len(malicious_domains)):.6f} seconds\n")
-        
-        # Print results
-        print("\nModel Evaluation Results:")
-        print(f"Experiment ID: {exp_id}")
-        print(f"Accuracy: {results['accuracy']:.4f}")
-        print(f"Precision: {results['precision']:.4f}")
-        print(f"Recall (Detection Rate): {results['recall']:.4f}")
-        print(f"F1 Score: {results['f1_score']:.4f}")
-        print(f"False Positive Rate: {results['false_positive_rate']:.4f}")
-        
-        # Save results summary to file
-        with open(os.path.join(output_dir, f'results_summary_{exp_id}.txt'), 'w') as f:
-            f.write(f"Experiment ID: {exp_id}\n\n")
-            f.write(f"Accuracy: {results['accuracy']:.10f}\n")
-            f.write(f"Precision: {results['precision']:.10f}\n")
-            f.write(f"Recall (Detection Rate): {results['recall']:.10f}\n")
-            f.write(f"F1 Score: {results['f1_score']:.10f}\n")
-            f.write(f"False Positive Rate: {results['false_positive_rate']:.10f}\n\n")
-            
-            # Add family results
-            f.write("Detection Rate by DGA Family:\n")
-            for family, metrics in sorted(family_results.items(), key=lambda x: x[1]['detection_rate'], reverse=True):
-                f.write(f"{family}: {metrics['detection_rate']:.10f}\n")
-        
-        # Plot results
-        plot_results(results, output_dir)
+                
+        save_text_results(results, family_results, feature_importance_by_family, output_dir, exp_id)
 
 if __name__ == "__main__":
     main()
