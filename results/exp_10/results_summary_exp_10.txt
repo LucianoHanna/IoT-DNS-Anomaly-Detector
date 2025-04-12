@@ -1,0 +1,70 @@
+Experiment ID: exp_10
+
+Accuracy: 0.5770586929
+Precision: 0.9998305146
+Recall (Detection Rate): 0.5768118519
+F1 Score: 0.7315724897
+False Positive Rate: 0.1200000000
+
+Confusion Matrix:
+              | Predicted Negative | Predicted Positive
+True Negative |                242 |                 33
+True Positive |             142826 |             194674
+
+
+Detection Rate by DGA Family:
+pushdo: 0.9485185185
+corebot: 0.8982222222
+conficker: 0.8502962963
+padcrypt: 0.8385185185
+simda: 0.7540740741
+murofet: 0.7453333333
+rovnix: 0.7358518519
+vawtrak: 0.7080740741
+suppobox: 0.6665185185
+kraken: 0.6470370370
+pykspa: 0.6118518519
+tinba: 0.5581481481
+necurs: 0.5302222222
+ramdo: 0.5112592593
+fobber: 0.5001481481
+qadars: 0.4817037037
+dircrypt: 0.4708888889
+nymaim: 0.4577037037
+ramnit: 0.4524444444
+matsnu: 0.3722962963
+ranbyus: 0.3700000000
+cryptolocker: 0.3657037037
+symmi: 0.3491851852
+gozi: 0.3129629630
+emotet: 0.2833333333
+
+
+Feature Importance by DGA Family:
+family       | detection_rate | entropy
+---------------------------------------
+pushdo       | 0.9485         | 3.0968 
+corebot      | 0.8982         | 4.0763 
+conficker    | 0.8503         | 3.0925 
+padcrypt     | 0.8385         | 3.1912 
+simda        | 0.7541         | 3.1939 
+murofet      | 0.7453         | 4.0780 
+rovnix       | 0.7359         | 3.9428 
+vawtrak      | 0.7081         | 3.2796 
+suppobox     | 0.6665         | 3.3060 
+kraken       | 0.6470         | 3.3736 
+pykspa       | 0.6119         | 3.3727 
+tinba        | 0.5581         | 3.4556 
+necurs       | 0.5302         | 3.5483 
+ramdo        | 0.5113         | 3.3934 
+fobber       | 0.5001         | 3.4329 
+qadars       | 0.4817         | 3.5362 
+dircrypt     | 0.4709         | 3.6361 
+nymaim       | 0.4577         | 3.4821 
+ramnit       | 0.4524         | 3.5897 
+matsnu       | 0.3723         | 3.7520 
+ranbyus      | 0.3700         | 3.7219 
+cryptolocker | 0.3657         | 3.6321 
+symmi        | 0.3492         | 3.5307 
+gozi         | 0.3130         | 3.5474 
+emotet       | 0.2833         | 3.6834 

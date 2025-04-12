@@ -1,0 +1,70 @@
+Experiment ID: exp_14
+
+Accuracy: 0.8762519429
+Precision: 0.9999695657
+Recall (Detection Rate): 0.8761777778
+F1 Score: 0.9339896623
+False Positive Rate: 0.0327272727
+
+Confusion Matrix:
+              | Predicted Negative | Predicted Positive
+True Negative |                266 |                  9
+True Positive |              41790 |             295710
+
+
+Detection Rate by DGA Family:
+dircrypt: 1.0000000000
+emotet: 1.0000000000
+fobber: 1.0000000000
+gozi: 1.0000000000
+matsnu: 1.0000000000
+murofet: 1.0000000000
+necurs: 1.0000000000
+nymaim: 1.0000000000
+pushdo: 1.0000000000
+pykspa: 1.0000000000
+qadars: 1.0000000000
+ramdo: 1.0000000000
+ramnit: 1.0000000000
+ranbyus: 1.0000000000
+rovnix: 1.0000000000
+simda: 1.0000000000
+suppobox: 1.0000000000
+vawtrak: 1.0000000000
+tinba: 0.9668888889
+padcrypt: 0.9383703704
+cryptolocker: 0.8571111111
+conficker: 0.6421481481
+kraken: 0.4999259259
+corebot: 0.0000000000
+symmi: 0.0000000000
+
+
+Feature Importance by DGA Family:
+family       | detection_rate | subdomain_count
+-----------------------------------------------
+dircrypt     | 1.0000         | 2.0000         
+emotet       | 1.0000         | 2.0000         
+fobber       | 1.0000         | 2.0000         
+gozi         | 1.0000         | 2.0000         
+matsnu       | 1.0000         | 2.0000         
+murofet      | 1.0000         | 2.0000         
+necurs       | 1.0000         | 2.0000         
+nymaim       | 1.0000         | 2.0000         
+pushdo       | 1.0000         | 2.0000         
+pykspa       | 1.0000         | 2.0000         
+qadars       | 1.0000         | 2.0000         
+ramdo        | 1.0000         | 2.0000         
+ramnit       | 1.0000         | 2.0000         
+ranbyus      | 1.0000         | 2.0000         
+rovnix       | 1.0000         | 2.0000         
+simda        | 1.0000         | 2.0000         
+suppobox     | 1.0000         | 2.0000         
+vawtrak      | 1.0000         | 2.0000         
+tinba        | 0.9669         | 2.0331         
+padcrypt     | 0.9384         | 2.0616         
+cryptolocker | 0.8571         | 2.1429         
+conficker    | 0.6421         | 2.3579         
+kraken       | 0.4999         | 2.5001         
+corebot      | 0.0000         | 3.0000         
+symmi        | 0.0000         | 3.0000         

@@ -14,7 +14,7 @@ NGRAM_TOP_K = 75        # Number of most common n-grams to consider as "normal"
 # You can enable/disable specific features or add weights if needed
 FEATURE_CONFIG = {
     'length': False,                 # Use domain length as a feature
-    'alphanumeric_ratio': True,     # Use proportion of alphanumeric characters
+    'alphanumeric_ratio': False,     # Use proportion of alphanumeric characters
     'entropy': False,                # Use character entropy
     'ngram_features': True,         # Use n-gram based features
     'vowel_ratio': False,           # Ratio of vowels in the domain

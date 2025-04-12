@@ -1,0 +1,70 @@
+Experiment ID: exp_13
+
+Accuracy: 0.1318155577
+Precision: 0.9962764406
+Recall (Detection Rate): 0.1316000000
+F1 Score: 0.2324899694
+False Positive Rate: 0.6036363636
+
+Confusion Matrix:
+              | Predicted Negative | Predicted Positive
+True Negative |                109 |                166
+True Positive |             293085 |              44415
+
+
+Detection Rate by DGA Family:
+corebot: 0.9931111111
+rovnix: 0.9862962963
+qadars: 0.9782222222
+murofet: 0.3315555556
+tinba: 0.0007407407
+conficker: 0.0000740741
+cryptolocker: 0.0000000000
+dircrypt: 0.0000000000
+emotet: 0.0000000000
+fobber: 0.0000000000
+gozi: 0.0000000000
+kraken: 0.0000000000
+matsnu: 0.0000000000
+necurs: 0.0000000000
+nymaim: 0.0000000000
+padcrypt: 0.0000000000
+pushdo: 0.0000000000
+pykspa: 0.0000000000
+ramdo: 0.0000000000
+ramnit: 0.0000000000
+ranbyus: 0.0000000000
+simda: 0.0000000000
+suppobox: 0.0000000000
+symmi: 0.0000000000
+vawtrak: 0.0000000000
+
+
+Feature Importance by DGA Family:
+family       | detection_rate | digit_ratio | has_digits
+--------------------------------------------------------
+corebot      | 0.9931         | 0.1770      | 0.9950    
+rovnix       | 0.9863         | 0.1961      | 0.9916    
+qadars       | 0.9782         | 0.2070      | 0.9782    
+murofet      | 0.3316         | 0.0994      | 0.3534    
+tinba        | 0.0007         | 0.0002      | 0.0008    
+conficker    | 0.0001         | 0.0000      | 0.0001    
+cryptolocker | 0.0000         | 0.0000      | 0.0000    
+dircrypt     | 0.0000         | 0.0000      | 0.0000    
+emotet       | 0.0000         | 0.0000      | 0.0000    
+fobber       | 0.0000         | 0.0000      | 0.0000    
+gozi         | 0.0000         | 0.0000      | 0.0000    
+kraken       | 0.0000         | 0.0000      | 0.0000    
+matsnu       | 0.0000         | 0.0000      | 0.0000    
+necurs       | 0.0000         | 0.0000      | 0.0000    
+nymaim       | 0.0000         | 0.0000      | 0.0000    
+padcrypt     | 0.0000         | 0.0000      | 0.0000    
+pushdo       | 0.0000         | 0.0000      | 0.0000    
+pykspa       | 0.0000         | 0.0000      | 0.0000    
+ramdo        | 0.0000         | 0.0000      | 0.0000    
+ramnit       | 0.0000         | 0.0000      | 0.0000    
+ranbyus      | 0.0000         | 0.0000      | 0.0000    
+simda        | 0.0000         | 0.0000      | 0.0000    
+suppobox     | 0.0000         | 0.0000      | 0.0000    
+symmi        | 0.0000         | 0.0000      | 0.0000    
+vawtrak      | 0.0000         | 0.0000      | 0.0000    

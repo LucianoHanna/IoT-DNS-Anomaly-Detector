@@ -16,7 +16,7 @@ FEATURE_CONFIG = {
     'length': False,                 # Use domain length as a feature
     'alphanumeric_ratio': True,     # Use proportion of alphanumeric characters
     'entropy': False,                # Use character entropy
-    'ngram_features': True,         # Use n-gram based features
+    'ngram_features': False,         # Use n-gram based features
     'vowel_ratio': False,           # Ratio of vowels in the domain
     'digit_ratio': False,           # Ratio of digits in the domain
     'subdomain_count': False,        # Subdomain count

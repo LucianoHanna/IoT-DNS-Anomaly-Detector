@@ -1,0 +1,70 @@
+Experiment ID: exp_8
+
+Accuracy: 0.7616727111
+Precision: 0.9999377507
+Recall (Detection Rate): 0.7615259259
+F1 Score: 0.8645974726
+False Positive Rate: 0.0581818182
+
+Confusion Matrix:
+              | Predicted Negative | Predicted Positive
+True Negative |                259 |                 16
+True Positive |              80485 |             257015
+
+
+Detection Rate by DGA Family:
+conficker: 1.0000000000
+emotet: 1.0000000000
+pushdo: 1.0000000000
+pykspa: 1.0000000000
+qadars: 1.0000000000
+simda: 1.0000000000
+vawtrak: 1.0000000000
+tinba: 0.9997037037
+fobber: 0.9881481481
+cryptolocker: 0.8934814815
+kraken: 0.8680000000
+suppobox: 0.8288888889
+matsnu: 0.8122962963
+nymaim: 0.8056296296
+necurs: 0.8053333333
+dircrypt: 0.7651851852
+murofet: 0.7587407407
+ramnit: 0.7529629630
+corebot: 0.6645925926
+symmi: 0.6268888889
+rovnix: 0.5998518519
+gozi: 0.4454814815
+padcrypt: 0.3768148148
+ranbyus: 0.0461481481
+ramdo: 0.0000000000
+
+
+Feature Importance by DGA Family:
+family       | detection_rate | length 
+---------------------------------------
+conficker    | 1.0000         | 10.8847
+emotet       | 1.0000         | 19.0000
+pushdo       | 1.0000         | 11.0000
+pykspa       | 1.0000         | 14.5173
+qadars       | 1.0000         | 16.0000
+simda        | 1.0000         | 11.6513
+vawtrak      | 1.0000         | 13.0053
+tinba        | 0.9997         | 15.8489
+fobber       | 0.9881         | 14.0830
+cryptolocker | 0.8935         | 17.7901
+kraken       | 0.8680         | 15.2510
+suppobox     | 0.8289         | 17.3807
+matsnu       | 0.8123         | 30.1402
+nymaim       | 0.8056         | 17.6810
+necurs       | 0.8053         | 17.1367
+dircrypt     | 0.7652         | 18.0448
+murofet      | 0.7587         | 30.3697
+ramnit       | 0.7530         | 17.5053
+corebot      | 0.6646         | 28.0093
+symmi        | 0.6269         | 20.5055
+rovnix       | 0.5999         | 21.5999
+gozi         | 0.4455         | 23.2570
+padcrypt     | 0.3768         | 20.3683
+ranbyus      | 0.0461         | 20.1153
+ramdo        | 0.0000         | 20.0000

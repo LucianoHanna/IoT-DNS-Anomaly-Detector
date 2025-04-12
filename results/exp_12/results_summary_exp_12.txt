@@ -1,0 +1,70 @@
+Experiment ID: exp_12
+
+Accuracy: 0.6395796018
+Precision: 0.9992502881
+Recall (Detection Rate): 0.6397659259
+F1 Score: 0.7800853711
+False Positive Rate: 0.5890909091
+
+Confusion Matrix:
+              | Predicted Negative | Predicted Positive
+True Negative |                113 |                162
+True Positive |             121579 |             215921
+
+
+Detection Rate by DGA Family:
+rovnix: 0.7831851852
+ramdo: 0.7800000000
+emotet: 0.7691851852
+ranbyus: 0.7412592593
+tinba: 0.7311111111
+fobber: 0.7282962963
+gozi: 0.7248888889
+corebot: 0.7135555556
+padcrypt: 0.7127407407
+conficker: 0.7114074074
+kraken: 0.7043703704
+murofet: 0.6877777778
+necurs: 0.6849629630
+pykspa: 0.6812592593
+dircrypt: 0.6777777778
+qadars: 0.6685185185
+ramnit: 0.6640740741
+cryptolocker: 0.6122962963
+simda: 0.5835555556
+matsnu: 0.5657777778
+suppobox: 0.5500000000
+nymaim: 0.5320740741
+pushdo: 0.4952592593
+vawtrak: 0.2487407407
+symmi: 0.2420740741
+
+
+Feature Importance by DGA Family:
+family       | detection_rate | vowel_ratio
+-------------------------------------------
+rovnix       | 0.7832         | 0.1588     
+ramdo        | 0.7800         | 0.3580     
+emotet       | 0.7692         | 0.2734     
+ranbyus      | 0.7413         | 0.2010     
+tinba        | 0.7311         | 0.1847     
+fobber       | 0.7283         | 0.2091     
+gozi         | 0.7249         | 0.3994     
+corebot      | 0.7136         | 0.1415     
+padcrypt     | 0.7127         | 0.2639     
+conficker    | 0.7114         | 0.1885     
+kraken       | 0.7044         | 0.1967     
+murofet      | 0.6878         | 0.1792     
+necurs       | 0.6850         | 0.1969     
+pykspa       | 0.6813         | 0.2999     
+dircrypt     | 0.6778         | 0.2052     
+qadars       | 0.6685         | 0.2647     
+ramnit       | 0.6641         | 0.2140     
+cryptolocker | 0.6123         | 0.2236     
+simda        | 0.5836         | 0.3636     
+matsnu       | 0.5658         | 0.3628     
+suppobox     | 0.5500         | 0.3442     
+nymaim       | 0.5321         | 0.3218     
+pushdo       | 0.4953         | 0.4140     
+vawtrak      | 0.2487         | 0.3511     
+symmi        | 0.2421         | 0.3273     

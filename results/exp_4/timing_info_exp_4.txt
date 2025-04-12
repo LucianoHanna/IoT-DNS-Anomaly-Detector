@@ -1,0 +1,11 @@
+Experiment ID: exp_4
+Training time: 0.03 seconds for 295 domains
+Average time per domain: 0.000097 seconds
+
+Parameters used in this experiment:
+SVM_PARAMS: {'nu': 0.1, 'kernel': 'rbf', 'gamma': 'scale'}
+NGRAM_SIZE: 2
+NGRAM_TOP_K: 75
+FEATURE_CONFIG: {'length': True, 'alphanumeric_ratio': True, 'entropy': True, 'ngram_features': True, 'vowel_ratio': False, 'digit_ratio': True, 'subdomain_count': False}
+Evaluation time: 21.38 seconds for 337775 domains
+Average evaluation time per domain: 0.000063 seconds

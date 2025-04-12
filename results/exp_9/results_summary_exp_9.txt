@@ -1,0 +1,70 @@
+Experiment ID: exp_9
+
+Accuracy: 0.9327066834
+Precision: 0.9999587034
+Recall (Detection Rate): 0.9326903704
+F1 Score: 0.9651538565
+False Positive Rate: 0.0472727273
+
+Confusion Matrix:
+              | Predicted Negative | Predicted Positive
+True Negative |                262 |                 13
+True Positive |              22717 |             314783
+
+
+Detection Rate by DGA Family:
+corebot: 1.0000000000
+dircrypt: 1.0000000000
+emotet: 1.0000000000
+fobber: 1.0000000000
+gozi: 1.0000000000
+murofet: 1.0000000000
+necurs: 1.0000000000
+padcrypt: 1.0000000000
+pushdo: 1.0000000000
+pykspa: 1.0000000000
+qadars: 1.0000000000
+ramdo: 1.0000000000
+ramnit: 1.0000000000
+ranbyus: 1.0000000000
+rovnix: 1.0000000000
+suppobox: 1.0000000000
+vawtrak: 1.0000000000
+matsnu: 0.9817777778
+tinba: 0.9668888889
+simda: 0.9451851852
+cryptolocker: 0.9279259259
+nymaim: 0.6937037037
+kraken: 0.6574814815
+symmi: 0.6272592593
+conficker: 0.5170370370
+
+
+Feature Importance by DGA Family:
+family       | detection_rate | alphanumeric_ratio
+--------------------------------------------------
+corebot      | 1.0000         | 0.9276            
+dircrypt     | 1.0000         | 0.9420            
+emotet       | 1.0000         | 0.9474            
+fobber       | 1.0000         | 0.9289            
+gozi         | 1.0000         | 0.9560            
+murofet      | 1.0000         | 0.9633            
+necurs       | 1.0000         | 0.9375            
+padcrypt     | 1.0000         | 0.9479            
+pushdo       | 1.0000         | 0.9091            
+pykspa       | 1.0000         | 0.9282            
+qadars       | 1.0000         | 0.9375            
+ramdo        | 1.0000         | 0.9500            
+ramnit       | 1.0000         | 0.9405            
+ranbyus      | 1.0000         | 0.9502            
+rovnix       | 1.0000         | 0.9537            
+suppobox     | 1.0000         | 0.9391            
+vawtrak      | 1.0000         | 0.9222            
+matsnu       | 0.9818         | 0.9642            
+tinba        | 0.9669         | 0.9349            
+simda        | 0.9452         | 0.9130            
+cryptolocker | 0.9279         | 0.9361            
+nymaim       | 0.6937         | 0.9137            
+kraken       | 0.6575         | 0.9022            
+symmi        | 0.6273         | 0.9012            
+conficker    | 0.5170         | 0.8755            
