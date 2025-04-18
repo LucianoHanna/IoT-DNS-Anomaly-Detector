@@ -2,8 +2,6 @@ import numpy as np
 import pandas as pd
 import os
 import joblib
-import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn import svm
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
@@ -107,10 +105,21 @@ class BotnetDetector:
             return False
     
     def predict(self, domains):
-        """Predict if domains are anomalous (potential botnet)"""
+        """
+        Predict if domains are anomalous (potential botnet)
+        
+        Parameters:
+        domains (list or str): Single domain or list of domains to predict
+        
+        Returns:
+        pd.DataFrame: DataFrame with prediction results
+        """
         if self.model is None or self.scaler is None:
             if not self.load_model():
                 raise ValueError("Model not trained or loaded")
+        
+        if isinstance(domains, str):
+            domains = [domains]
         
         # Extract features
         features_df = self.feature_extractor.preprocess_domains(domains)
@@ -137,37 +146,35 @@ class BotnetDetector:
         else:
             normalized_scores = np.zeros_like(anomaly_scores)
         
+        # Create results DataFrame
         results = pd.DataFrame({
             'domain': domains,
             'is_anomaly': predictions_binary,
             'anomaly_score': normalized_scores,
-            'rare_ngram_ratio': features_df['rare_ngram_ratio'] if 'rare_ngram_ratio' in features_df.columns else 0,
-            'entropy': features_df['entropy'] if 'entropy' in features_df.columns else 0
         })
+        
+        # Incluir atributos extras se solicitado (para análise detalhada)
+        include_features = False  # Default para performance
+        if include_features:
+            for col in features_df.columns:
+                if col in features_df.columns:
+                    results[col] = features_df[col]
         
         return results
     
     def evaluate(self, benign_domains, malicious_domains):
-        """Evaluate model performance"""
+        """Evaluate model performance on benign and malicious domains"""
         if self.model is None or self.scaler is None:
             if not self.load_model():
                 raise ValueError("Model not trained or loaded")
         
-        # Extract and scale features for benign domains
-        benign_features_df = self.feature_extractor.preprocess_domains(benign_domains)
-        benign_features_scaled = self.scaler.transform(benign_features_df)
-        
-        # Extract and scale features for malicious domains
-        malicious_features_df = self.feature_extractor.preprocess_domains(malicious_domains)
-        malicious_features_scaled = self.scaler.transform(malicious_features_df)
-        
         # Predict on benign domains
-        benign_predictions = self.model.predict(benign_features_scaled)
-        benign_predictions_binary = np.where(benign_predictions == -1, 1, 0)
+        benign_results = self.predict(benign_domains)
+        benign_predictions_binary = benign_results['is_anomaly'].values
         
         # Predict on malicious domains
-        malicious_predictions = self.model.predict(malicious_features_scaled)
-        malicious_predictions_binary = np.where(malicious_predictions == -1, 1, 0)
+        malicious_results = self.predict(malicious_domains)
+        malicious_predictions_binary = malicious_results['is_anomaly'].values
         
         # Create true labels
         y_true_benign = np.zeros_like(benign_predictions_binary)  # 0 = normal
@@ -191,6 +198,10 @@ class BotnetDetector:
         
         false_positive_rate = fp / (fp + tn) if (fp + tn) > 0 else 0
         detection_rate = tp / (tp + fn) if (tp + fn) > 0 else 0
+        
+        # Extract feature DataFrames for analysis
+        benign_features_df = self.feature_extractor.preprocess_domains(benign_domains)
+        malicious_features_df = self.feature_extractor.preprocess_domains(malicious_domains)
         
         # Analyze feature importance
         feature_importance = self._analyze_feature_importance(benign_features_df, malicious_features_df)
@@ -237,19 +248,21 @@ class BotnetDetector:
         all_feature_dfs = {}
         
         for family, domains in dga_families.items():
-            # Extract and scale features
+            # Use predict function to get results
+            prediction_results = self.predict(domains)
+            
+            # Extract predictions
+            predictions_binary = prediction_results['is_anomaly'].values
+            
+            # Get feature data for analysis
             features_df = self.feature_extractor.preprocess_domains(domains)
-            features_scaled = self.scaler.transform(features_df)
-            
-            # Predict
-            predictions = self.model.predict(features_scaled)
-            predictions_binary = np.where(predictions == -1, 1, 0)
-            
-            # Calculate decision scores
-            decision_scores = self.model.decision_function(features_scaled)
             
             # Calculate detection rate and other metrics
             detection_rate = np.mean(predictions_binary)
+            
+            # Calculate decision scores
+            features_scaled = self.scaler.transform(features_df)
+            decision_scores = self.model.decision_function(features_scaled)
             avg_decision_score = np.mean(-decision_scores)  # Negative so higher = more anomalous
             
             family_results[family] = {
@@ -263,7 +276,7 @@ class BotnetDetector:
         
         # Calculate feature importance per family
         feature_importance_by_family = {}
-        benign_features = self.feature_extractor.preprocess_domains(dga_families[list(dga_families.keys())[0]][:1])
+        benign_features = self.feature_extractor.preprocess_domains([dga_families[list(dga_families.keys())[0]][0]])
         benign_columns = benign_features.columns
         
         for family, features_df in all_feature_dfs.items():
