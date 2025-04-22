@@ -1,19 +1,35 @@
 import pytest
 import os
+import shutil
 import pandas as pd
 from botnet_detector import BotnetDetector
 from feature_extraction import DNSLogParser
 
-# Adicionar parser para obter o número do experimento via linha de comando
+def setup_config_for_benchmark(exp_id):
+    """
+    Copia o arquivo de configuração do experimento especificado para o arquivo config.py atual
+    """
+    exp_config_path = os.path.join("/app/results", f"exp_{exp_id}", f"config_exp_{exp_id}.py")
+    current_config_path = "/app/config.py"
+    
+    if not os.path.exists(exp_config_path):
+        raise FileNotFoundError(f"Arquivo de configuração para o experimento {exp_id} não encontrado: {exp_config_path}")
+    
+    if os.path.exists(current_config_path):
+        backup_path = current_config_path + ".backup"
+        shutil.copy2(current_config_path, backup_path)
 
-# Função auxiliar para verificar se existe um modelo treinado
+    shutil.copy2(exp_config_path, current_config_path)
+    
+    print(f"Configuração do experimento {exp_id} aplicada com sucesso.")
 
 @pytest.fixture
 def detector(request):
     """Fixture para carregar um detector pré-treinado"""
     # Obter o número do experimento da linha de comando
     exp_id = request.config.getoption("--exp-id")
-        
+    
+    setup_config_for_benchmark(exp_id)
     model_dir = os.path.join("/app/models", f"exp_{exp_id}")
     detector = BotnetDetector(model_dir=model_dir)
     
