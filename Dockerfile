@@ -10,6 +10,8 @@ RUN chmod +x entrypoint.sh
 
 COPY src/*.py .
 
+COPY src/tests/*.py ./tests/
+
 RUN mkdir -p /app/data /app/models /app/results
 
 VOLUME ["/app/data", "/app/models", "/app/results"]
