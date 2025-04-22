@@ -27,6 +27,19 @@ case "$1" in
     exp_id="$1"
     shift
     echo "Running benchmark for experiment: $exp_id"
+
+    # Copiar a configuração do experimento para o config.py antes de executar o benchmark
+    exp_config_path="/app/results/exp_${exp_id}/config_exp_${exp_id}.py"
+    current_config_path="/app/config.py"
+    
+    if [ -f "$exp_config_path" ]; then
+      echo "Applying configuration from experiment ${exp_id}..."
+      cp "$exp_config_path" "/app/config.py"
+      echo "Configuration applied successfully."
+    else
+      echo "Warning: Configuration file for experiment ${exp_id} not found: ${exp_config_path}"
+    fi
+    
     python -m pytest /app/tests/test_benchmark_detector_rps.py -v --benchmark-json="/app/results/exp_${exp_id}/benchmark_results.json" --exp-id="$exp_id"
     
     ;;
