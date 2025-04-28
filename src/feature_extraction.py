@@ -5,7 +5,18 @@ from collections import Counter
 from config import NGRAM_SIZE, NGRAM_TOP_K, FEATURE_CONFIG
 
 class DomainFeatureExtractor:
+    """
+    Extracts lexical features from domain names for botnet detection.
+    
+    This class implements various feature extraction techniques to identify
+    characteristics of domain names that might indicate algorithmically
+    generated domains (DGAs) commonly used by botnets.
+    """
+    
     def __init__(self):
+        """
+        Initialize the feature extractor with empty n-gram sets.
+        """
         self.common_ngrams = set()
         self.ngram_freq = Counter()
         

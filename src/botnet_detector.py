@@ -10,6 +10,15 @@ from feature_extraction import DomainFeatureExtractor
 from config import SVM_PARAMS
 
 class BotnetDetector:
+    """
+    Botnet detector using One-class SVM for anomaly detection in DNS queries.
+    
+    This class implements the core logic for botnet detection through analysis of 
+    domain names used in DNS queries. It trains a One-class SVM model on benign DNS 
+    traffic and can identify potentially malicious domains based on their lexical 
+    features. The class supports model persistence, evaluation against known DGA 
+    domains, and detailed performance metrics.
+    """
     def __init__(self, model_dir='models'):
         """Initialize the botnet detector"""
         self.model_dir = model_dir
