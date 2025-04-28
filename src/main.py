@@ -4,7 +4,7 @@ import time
 import os
 import shutil
 import glob
-from feature_extraction import DNSLogParser
+from dns_log_parser import DNSLogParser
 from botnet_detector import BotnetDetector
 
 from config import TRAIN_TEST_SPLIT

@@ -3,7 +3,7 @@ import os
 import shutil
 import pandas as pd
 from botnet_detector import BotnetDetector
-from feature_extraction import DNSLogParser
+from dns_log_parser import DNSLogParser
 
 def setup_config_for_benchmark(exp_id):
     """
