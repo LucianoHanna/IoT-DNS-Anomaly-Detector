@@ -54,6 +54,10 @@ Todas as dependências de software são encapsuladas na imagem Docker. O process
 - pytest==8.3.5
 - pytest-benchmark==5.1.0
 
+## Preocupações com segurança
+
+A execução deste artefato não oferece riscos de segurança para os avaliadores. O código opera inteiramente dentro de um container Docker isolado e manipula apenas os arquivos de texto fornecidos no repositório (`.log`, `.csv`). Nenhuma conexão externa à internet é estabelecida durante o treinamento ou avaliação.
+
 ## Instalação
 
 O processo de instalação consiste apenas na construção da imagem Docker que contém todo o ambiente e as dependências necessárias.
