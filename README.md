@@ -26,6 +26,27 @@ O repositório está organizado da seguinte forma:
 -   `Dockerfile`: Arquivo de definição para a construção da imagem Docker da aplicação.
 -   `requirements.txt`: Lista de dependências Python.
 
+## Parâmetros de Execução
+
+A tabela a seguir descreve os principais parâmetros configuráveis no arquivo `src/config.py`. Estes parâmetros permitem ajustar o comportamento do modelo de detecção sem a necessidade de alterar o código-fonte.
+
+| Parâmetro | Descrição | 
+| :--- | :--- | 
+| `TRAIN_TEST_SPLIT` | Proporção dos dados de log DNS utilizada para o treinamento do modelo. | 
+| `NGRAM_SIZE` | Tamanho dos n-grams a serem extraídos dos nomes de domínio. | 
+| `NGRAM_TOP_K` | Número de n-grams mais frequentes considerados "normais". | 
+| `FEATURE_CONFIG.length` | Habilita o uso do comprimento do domínio como feature. | 
+| `FEATURE_CONFIG.alphanumeric_ratio` | Habilita o uso da proporção de caracteres alfanuméricos. | 
+| `FEATURE_CONFIG.entropy` | Habilita o uso da entropia de caracteres do domínio. | 
+| `FEATURE_CONFIG.ngram_features` | Habilita o uso de features baseadas em n-grams. | 
+| `FEATURE_CONFIG.vowel_ratio` | Habilita o uso da proporção de vogais no domínio. | 
+| `FEATURE_CONFIG.digit_ratio` | Habilita o uso da proporção de dígitos no domínio. | 
+| `FEATURE_CONFIG.subdomain_count` | Habilita o uso da contagem de subdomínios. | 
+| `SVM_PARAMS.nu` | Hiperparâmetro do SVM que define um limite superior para a fração de erros de treinamento e um limite inferior para a fração de vetores de suporte. | 
+| `SVM_PARAMS.kernel` | Tipo de kernel a ser usado no algoritmo SVM. | 
+| `SVM_PARAMS.gamma` | Coeficiente do kernel para 'rbf', 'poly' e 'sigmoid'. |
+
+
 ## Selos Considerados
 
 Os selos considerados para este artefato são: **Artefatos Disponíveis (SeloD)**, **Artefatos Funcionais (SeloF)**, **Artefatos Sustentáveis (SeloS)** e **Experimentos Reprodutíveis (SeloR)**.
@@ -759,3 +780,4 @@ public licenses.
 
 Creative Commons may be contacted at creativecommons.org.
 ```
+
